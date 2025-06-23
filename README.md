@@ -1,0 +1,2 @@
+# gamingtech
+site affilaite
