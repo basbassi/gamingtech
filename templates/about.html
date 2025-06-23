@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}À propos - GamingTech{% endblock %}
+{% block description %}
+Découvrez l'équipe, les valeurs et la mission de GamingTech — la référence pour les gamers recherchant des équipements fiables et des conseils professionnels.
+{% endblock %}
+
+{% block content %}
+<style>
+  .about-section {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+    padding: 3rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .about-section h1 {
+    font-size: 2.5rem;
+    color: #ffc107;
+    font-weight: bold;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.6rem;
+    color: #ffdd57;
+    font-weight: 600;
+    margin-top: 2rem;
+  }
+
+  .about-section p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .about-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+
+  .about-section ul li {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    position: relative;
+    padding-left: 1.8rem;
+  }
+
+  .about-section ul li::before {
+    content: "✔️";
+    position: absolute;
+    left: 0;
+    color: #ffc107;
+  }
+
+  .about-section strong {
+    color: #fff;
+  }
+
+  .about-section hr {
+    border-top: 1px solid #444;
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .about-section {
+      padding: 2rem 1rem;
+    }
+
+    .about-section h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<section class="py-5 bg-dark" itemscope itemtype="https://schema.org/AboutPage">
+  <div class="container">
+    <article class="about-section">
+      <h1 itemprop="headline">🎮 À propos de GamingTech</h1>
+      <p class="lead" itemprop="description">
+        Bienvenue sur <strong>GamingTech</strong> — votre plateforme dédiée aux passionnés de jeux vidéo !
+      </p>
+
+      <p>
+        Nous sélectionnons et recommandons les meilleurs produits gaming disponibles sur
+        <strong>Amazon France</strong> : claviers, souris, casques, écrans, et bien plus encore.
+      </p>
+
+      <p>
+        Notre mission est de vous offrir des <strong>guides clairs</strong>, des <strong>comparatifs fiables</strong>
+        et des <strong>liens affiliés</strong> pour acheter vos équipements en toute confiance.
+      </p>
+
+      <hr>
+
+      <h2>🚀 Pourquoi nous faire confiance ?</h2>
+      <ul>
+        <li>🎯 Sélection rigoureuse des produits</li>
+        <li>🛒 Liens directs vers Amazon.fr</li>
+        <li>📈 Mises à jour régulières selon les tendances</li>
+        <li>💬 Contact facile et rapide</li>
+      </ul>
+
+      <hr>
+
+      <p itemprop="author">Merci de votre visite sur <strong>GamingTech</strong> ! On vous souhaite un excellent setup 🎧🖥️⚙️</p>
+    </article>
+  </div>
+</section>
+{% endblock %}

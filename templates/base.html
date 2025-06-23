@@ -1,0 +1,373 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}GamingTech{% endblock %}</title>
+  <meta name="description" content="{% block description %}Site affilié Amazon GamingTech.{% endblock %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #8c00ff;
+      --primary-dark: #5f00ba;
+      --secondary: #ffcc00;
+      --dark: #0d0d0d;
+      --darker: #0a0a0a;
+      --light: #f8f9fa;
+      --card-bg: #1a1a2e;
+    }
+    body {
+      background-color: var(--dark);
+      color: var(--light);
+      min-height: 100vh;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(92, 0, 184, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(140, 0, 255, 0.1) 0%, transparent 20%);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6,
+    .navbar-brand,
+    .btn {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+    }
+
+    /* Navbar Premium */
+    .navbar {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      box-shadow: 0 4px 30px rgba(140, 0, 255, 0.3);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 204, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      color: var(--light);
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .navbar-brand::before {
+      content: "🎮";
+      margin-right: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--light) !important;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      margin: 0 0.25rem;
+      font-weight: 500;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--secondary) !important;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--secondary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 70%;
+    }
+
+    .dropdown-menu {
+      background-color: var(--darker);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .dropdown-item {
+      color: var(--light);
+      padding: 0.5rem 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--primary);
+      color: var(--light);
+      padding-left: 2rem;
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 2rem 0;
+    }
+
+    /* Cards Produits Premium */
+    .card {
+      height: 100%;
+      background-color: var(--card-bg);
+      border: none;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(140, 0, 255, 0.2);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: contain;
+      background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+      padding: 1.5rem;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+    
+    .card-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+    
+    .card-text {
+      color: rgba(255, 255, 255, 0.7);
+      flex-grow: 1;
+    }
+
+    /* Boutons Premium */
+    .btn-warning {
+      background-color: var(--secondary);
+      color: #000;
+      border: none;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      padding: 0.6rem 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn-warning::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.7s;
+      z-index: -1;
+    }
+
+    .btn-warning:hover {
+      background-color: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+    }
+    
+    .btn-warning:hover::before {
+      left: 100%;
+    }
+
+    /* Footer Premium */
+    footer {
+      background: linear-gradient(135deg, #120016, #1a001f);
+      color: #ccc;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(255, 204, 0, 0.1);
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+    }
+
+    footer a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--light);
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--secondary);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background: var(--secondary);
+      color: var(--dark);
+      transform: translateY(-3px);
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'index' %}">GamingTech</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item me-3">
+          <a class="nav-link{% if request.resolver_match.url_name == 'index' %} active{% endif %}" href="{% url 'index' %}">Accueil</a>
+        </li>
+
+        <li class="nav-item dropdown me-3">
+          <a class="nav-link dropdown-toggle{% if request.resolver_match.url_name == 'category_products' %} active{% endif %}" href="#" id="dropdownCat" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Nos produits
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownCat">
+            {% for cat in all_categories %}
+              <li><a class="dropdown-item" href="{% url 'category_products' cat.id %}">{{ cat.name }}</a></li>
+            {% empty %}
+              <li><span class="dropdown-item text-muted">Aucune catégorie</span></li>
+            {% endfor %}
+          </ul>
+        </li>
+
+        <li class="nav-item me-3">
+          <a class="nav-link{% if request.resolver_match.url_name == 'blog' %} active{% endif %}" href="{% url 'blog' %}">Blog</a>
+        </li>
+
+        <li class="nav-item me-3">
+          <a class="nav-link{% if request.resolver_match.url_name == 'contact' %} active{% endif %}" href="{% url 'contact' %}">Contact</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link{% if request.resolver_match.url_name == 'about' %} active{% endif %}" href="{% url 'about' %}">À propos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="text-center py-4">
+  <div class="container">
+    <div class="social-icons">
+      <a href="#" class="pulse"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="pulse"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="pulse"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="pulse"><i class="fab fa-discord"></i></a>
+      <a href="#" class="pulse"><i class="fab fa-youtube"></i></a>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase mb-3">Navigation</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="{% url 'index' %}">Accueil</a></li>
+          <li class="mb-2"><a href="{% url 'blog' %}">Blog</a></li>
+          <li class="mb-2"><a href="{% url 'contact' %}">Contact</a></li>
+          <li><a href="{% url 'about' %}">À propos</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase mb-3">Légal</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">Mentions légales</a></li>
+          <li class="mb-2"><a href="#">CGU</a></li>
+          <li class="mb-2"><a href="#">Politique de confidentialité</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase mb-3">Newsletter</h5>
+        <p class="small">Abonnez-vous pour recevoir nos offres exclusives !</p>
+        <form class="d-flex">
+          <input type="email" class="form-control me-2" placeholder="Votre email" required>
+          <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    
+    <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+    
+    <p class="mb-0">&copy; 2025 GamingTech. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

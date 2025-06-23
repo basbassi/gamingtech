@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - GamingTech{% endblock %}
+{% block description %}Contactez-nous pour toute question sur nos produits gaming affiliés à Amazon.{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h1 class="mb-4">📬 Contactez-nous</h1>
+    <p class="mb-4">Une question, suggestion ou partenariat ? Remplissez le formulaire :</p>
+
+    {% if success %}
+      <div class="alert alert-success">Votre message a été envoyé avec succès !</div>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-warning">Envoyer</button>
+    </form>
+
+    
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!-- templates/categories.html -->
+{% extends "base.html" %}
+
+{% block title %}Catégories - GamingTech{% endblock %}
+{% block description %}Découvrez nos catégories de produits gaming : claviers, souris, casques, composants, et plus encore !{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h1 class="mb-4">📂 Nos Catégories Gaming</h1>
+    <div class="row g-4">
+      {% for category in categories %}
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="{{ category.image_url }}" class="card-img-top" alt="{{ category.name }}">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ category.name }}</h5>
+            <p class="card-text">{{ category.description|default:"Découvrez nos produits." }}</p>
+            <a href="{% url 'category_products' category.id %}" class="btn btn-warning">Voir les produits</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

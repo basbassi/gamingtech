@@ -1,0 +1,23 @@
+<!-- templates/product.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ produit.name }} - GamingTech{% endblock %}
+{% block description %}Fiche produit détaillée pour {{ produit.name }}.{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{ produit.image_url }}" alt="{{ produit.name }}" class="img-fluid product-image" />
+      </div>
+      <div class="col-md-6">
+        <h1 class="mb-3">{{ produit.name }}</h1>
+        <h4 class="text-warning">Prix : {{ produit.price }}</h4>
+        <p class="mt-4">{{ produit.description }}</p>
+        <a href="{{ produit.affiliate_link }}" class="btn btn-warning btn-lg mt-3" target="_blank">Acheter sur Amazon</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

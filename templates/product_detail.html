@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}{{ produit.name }} - Détails{% endblock %}
+
+{% block content %}
+<style>
+  .product-detail-card {
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+  }
+
+  .product-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #212529;
+  }
+
+  .product-price {
+    font-size: 1.5rem;
+    color: #b12704;
+    font-weight: 600;
+  }
+
+  .product-old-price {
+    font-size: 1rem;
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 1rem;
+  }
+
+  .product-description {
+    margin-top: 1.5rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .btn-buy {
+    background-color: #ffa41c;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 2rem;
+    transition: background-color 0.3s ease;
+    color: #111;
+  }
+
+  .btn-buy:hover {
+    background-color: #ff9900;
+    color: #fff;
+  }
+
+  .btn-back {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .product-detail-image {
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row g-4 align-items-center product-detail-card">
+      <div class="col-md-5 text-center">
+        <img src="{{ produit.image_url }}" alt="{{ produit.name }}" class="img-fluid product-detail-image" style="max-height: 400px; object-fit: contain;">
+      </div>
+      <div class="col-md-7">
+        <h1 class="product-title mb-3">{{ produit.name }}</h1>
+        <div class="d-flex align-items-center mb-2">
+          <span class="product-price">{{ produit.price }} €</span>
+          {% if produit.old_price %}
+            <span class="product-old-price">{{ produit.old_price }} €</span>
+          {% endif %}
+        </div>
+        <p class="product-description">{{ produit.description }}</p>
+
+        <a href="{{ produit.affiliate_link }}" class="btn btn-buy me-2" target="_blank">🛒 Acheter sur Amazon</a>
+        <a href="{% url 'category_products' produit.category.id %}" class="btn btn-outline-secondary btn-back">← Retour à la catégorie</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
